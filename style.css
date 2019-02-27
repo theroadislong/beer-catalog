@@ -1,3 +1,7 @@
+body {
+    padding: 20px 0;
+}
+
 .slick-initialized .slick-slide {
 	display: flex;
 	flex-direction: column;
@@ -7,15 +11,15 @@
 
 img {
 	max-width: 100px;
-    height: 100px;
+	height: 100px;
 }
 
 .card__place {
 	width: 20px;
 	height: 20px;
 	background-color: lightblue;
-    border-radius: 50%;
-    text-align: center;
+	border-radius: 50%;
+	text-align: center;
 }
 
 .slider {
@@ -37,10 +41,34 @@ img {
 }
 
 h1 {
-    text-align: center;
+	text-align: center;
 }
 
 h2 {
-    margin-bottom: 50px;
+	margin-top: 30px;
+	text-align: center;
+}
+
+th,
+td {
+	padding: 10px;
+    min-width: 120px;
     text-align: center;
+}
+
+.table__row:nth-child(even) {
+	background-color: lightgray;
+}
+
+.table__row:nth-child(odd) {
+	background-color: lightblue;
+}
+
+.table {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.table__row:hover {
+    
 }

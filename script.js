@@ -1,8 +1,8 @@
-// получаем данные
-let arr = [];
 const url = "https://api.punkapi.com/v2/beers";
 const slider = document.querySelector(".slider");
+const table = document.querySelector(".table");
 
+// получаем данные
 function getData(url) {
 	fetch(url)
 		.then(response => response.json())
@@ -25,15 +25,21 @@ function getData(url) {
 				withDataAttr.push(item);
 			});
 
-			renderBeers(withDataAttr, slider);
+            renderBeers(withDataAttr, slider);
+            renderRows(withDataAttr, table)
             console.log(withDataAttr);
             
-            $('.slider').slick({
-                slidesToShow: 10,
-                slidesToScroll: 1,
-                autoplay: false
-              });
 
+			$(".slider").slick({
+				slidesToShow: 10,
+				slidesToScroll: 1,
+				autoplay: false
+            });
+            
+            const rows = document.querySelectorAll('.table__row')
+            rows.forEach(row => row.addEventListener('mouseover', (evt)=> {
+                console.log(evt.currentTarget)
+            }))
 		});
 }
 
@@ -44,7 +50,7 @@ getData(url);
 const cardTemplate = document.querySelector(".card-template").content;
 
 const createBeer = object => {
-	const newBeer = cardTemplate.cloneNode(true);
+    const newBeer = cardTemplate.cloneNode(true);
 	newBeer.querySelector(".card__image").src = object.image_url;
 	newBeer.querySelector(".card__image").alt = object.name;
 	newBeer.querySelector(".card__name").textContent = object.name;
@@ -60,6 +66,25 @@ const renderBeers = (objects, destination) => {
 	destination.appendChild(fragment);
 };
 
+// создаем таблицу
 
-// делаем таблицу с параметрами
+const rowTemplate = document.querySelector(".row-template").content;
+
+const createRow = object => {
+    const newRow = rowTemplate.cloneNode(true);
+	newRow.querySelector(".row__name").textContent = object.name;
+	newRow.querySelector(".row__est").textContent = object.first_brewed;
+	newRow.querySelector(".row__abv").textContent = object.abv;
+    newRow.querySelector(".row__ibu").textContent = object.ibu;
+	newRow.querySelector(".row__ph").textContent = object.ph;
+	newRow.querySelector(".row__srm").textContent = object.srm;
+    newRow.querySelector(".row__tagline").textContent = object.tagline;
+	return newRow;
+};
+
+const renderRows = (objects, destination) => {
+	const fragment = document.createDocumentFragment();
+	objects.forEach(object => fragment.appendChild(createRow(object)));
+	destination.appendChild(fragment);
+};
 

@@ -19,6 +19,18 @@
 		<h1>Beer catalog</h1>
 		<h2>Top 10 Beers by Attenuation Level</h2>
 		<div class="slider"></div>
+		<h2 class="main__heading">Таблица с данными</h2>
+		<table class="table">
+			<tr class="table__heading row">
+				<th class="row__name">name</th>
+				<th class="row__est">first brewed</th>
+				<th class="row__abv">abv</th>
+				<th class="row__ibu">ibu</th>
+				<th class="row__ph">ph</th>
+				<th class="row__srm">srm</th>
+				<th class="row__tagline">tagline</th>
+			</tr>
+		</table>
 		<template class="card-template" style="display: none">
 			<div class="card">
 				<img class="card__image" src="" alt="" />
@@ -29,10 +41,13 @@
 		</template>
 		<template class="row-template" style="display: none">
 			<tr class="table__row row">
-				<td class="row__id">id</td>
 				<td class="row__name">name</td>
-				<td class="row__date">date</td>
-				<td class="row__count">count</td>
+				<td class="row__est">est</td>
+				<td class="row__abv">abv</td>
+				<td class="row__ibu">ibu</td>
+				<td class="row__ph">ph</td>
+				<td class="row__srm">srm</td>
+				<td class="row__tagline">tagline</td>
 			</tr>
 		</template>
 		<script
@@ -46,11 +61,3 @@
 		<script src="script.js"></script>
 	</body>
 </html>
-
-<!-- 1 name -->
-<!-- 2 first_brewed -->
-<!-- 3 abv -->
-<!-- 4 ibu -->
-<!-- 5 ph -->
-<!-- 6 srm -->
-<!-- 7 tagline -->
