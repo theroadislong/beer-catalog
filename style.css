@@ -92,3 +92,23 @@ td {
 	border-radius: 5px;
 	padding: 10px;
 }
+
+.row:hover {
+	background-color: rgba(45,45,45,0.3)
+}
+
+p {
+	text-align: center;
+}
+
+.search__wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.search__input,
+.search__select {
+	font-size: 20px;
+	padding: 10px;
+	margin-bottom: 20px;
+}

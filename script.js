@@ -8,7 +8,7 @@ function getData(url) {
 	fetch(url)
 		.then(response => response.json())
 		.then(data => {
-			console.log('first data', data);
+			console.log("first data", data);
 
 			// сортируем данные для топ 10 по ключу attenuation_level
 			const sortData = [...data].sort(function(a, b) {
@@ -27,7 +27,7 @@ function getData(url) {
 				item["data-index"] = index + 1;
 				withDataAttr.push(item);
 			});
-			console.log('sorted data', withDataAttr);
+			console.log("sorted data", withDataAttr);
 
 			// рендерим слайдер и таблицу
 			renderBeers(withDataAttr, slider);
@@ -54,43 +54,69 @@ function getData(url) {
 				item.setAttribute("data-id", id);
 			});
 
-			// для каждой строки делаем появления модального окна c доп информацией
-			const rows = document.querySelectorAll(".table__row");
+			// делаем фильтрацию
+			const searchInput = document.querySelector(".search__input");
 
-			const mouseOverHandler = (evt) => {
-				if (evt.target.parentNode.tagName === 'TR' && evt.target.tagName !== 'TH') {
-					const currentRowId = Number(evt.target.parentNode.getAttribute("data-id"));
+			// обработчик на инпут
+			const searchHandler = event => {
+				const searchValue = searchInput.value.toLowerCase();
+				const sortValue = "name";
+				const filterFunction = object =>
+					searchValue === ""
+						? object
+						: object[sortValue].toLowerCase().indexOf(searchValue) !== -1;
+
+				// перед новым рендером удаляем текущие строки
+				const deleteRows = () => {
+					const rows = document.querySelectorAll(".table__row");
+					rows.forEach(row => row.remove());
+				};
+				deleteRows();
+
+				renderRows(
+					[...withDataAttr].filter(item => filterFunction(item)),
+					table
+				);
+			};
+
+			// обработчик для появления карточки
+			document.addEventListener("mouseover", evt => {
+				if (
+					evt.target.parentNode.tagName === "TR" &&
+					evt.target.tagName !== "TH"
+				) {
+					const currentRowId = Number(
+						evt.target.parentNode.getAttribute("data-id")
+					);
 
 					withDataAttr.forEach(item => {
 						if (item.id === currentRowId) {
-							const div = document.createElement('div');
+							const div = document.createElement("div");
 							div.className = "row__modal";
-							div.innerText = 'Food pairing: ' + item.food_pairing;
+							div.innerText = "Food pairing: " + item.food_pairing;
 
-							const currentRowIndex = item['data-index'];
-							div.style.top = currentRowIndex * 56 + 'px';
-							div.style.left = evt.clientX + 100 + 'px';
+							const currentRowIndex = item["data-index"];
+							// 56 - высота строки, 100 - насколько справа отодвинуть карточку
+							div.style.top = currentRowIndex * 56 + "px";
+							div.style.left = evt.clientX + 100 + "px";
 							tableWrapper.appendChild(div);
 						}
 					});
 				}
-			}
+			});
 
-			// удаляем все модалки после того как ушли 
-			document.addEventListener('mouseover', mouseOverHandler);
-			document.addEventListener('mouseout', (evt) => {
-				const currentModals = document.querySelectorAll('.row__modal')
+			document.addEventListener("mouseout", evt => {
+				const currentModals = document.querySelectorAll(".row__modal");
 				for (let i = 0; i < currentModals.length; i++) {
 					currentModals[i].remove();
 				}
 			});
+
+			searchInput.addEventListener("input", searchHandler);
 		});
 }
 
 getData(url);
-
-
-
 
 // создаем карточки для слайдера
 
