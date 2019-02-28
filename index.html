@@ -20,23 +20,26 @@
 		<h2>Top 10 Beers by Attenuation Level</h2>
 		<div class="slider"></div>
 		<h2 class="main__heading">Таблица с данными</h2>
-		<table class="table">
-			<tr class="table__heading row">
-				<th class="row__name">name</th>
-				<th class="row__est">first brewed</th>
-				<th class="row__abv">abv</th>
-				<th class="row__ibu">ibu</th>
-				<th class="row__ph">ph</th>
-				<th class="row__srm">srm</th>
-				<th class="row__tagline">tagline</th>
-			</tr>
-		</table>
+		<div class="table__wrapper">
+			<table class="table">
+				<tr class="table__heading row">
+					<th class="row__name">name</th>
+					<th class="row__est">first brewed</th>
+					<th class="row__abv">abv</th>
+					<th class="row__ibu">ibu</th>
+					<th class="row__ph">ph</th>
+					<th class="row__srm">srm</th>
+					<th class="row__tagline">tagline</th>
+				</tr>
+			</table>
+		</div>
 		<template class="card-template" style="display: none">
 			<div class="card">
 				<img class="card__image" src="" alt="" />
 				<span class="card__name"></span>
 				<span class="card__place"></span>
 				<span class="card__level"></span>
+				<span class="card__id"></span>
 			</div>
 		</template>
 		<template class="row-template" style="display: none">
@@ -48,6 +51,7 @@
 				<td class="row__ph">ph</td>
 				<td class="row__srm">srm</td>
 				<td class="row__tagline">tagline</td>
+				<td class="row__id">id</td>
 			</tr>
 		</template>
 		<script
